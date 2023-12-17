@@ -31,7 +31,7 @@
           <!-- Sidebar - Brand -->
           <a
             class="sidebar-brand d-flex align-items-center justify-content-center"
-            th:href="@{index}"
+            th:href="@{admin}"
           >
             <div class="sidebar-brand-icon rotate-n-15">
               <i class="fas fa-laugh-wink"></i>
@@ -56,6 +56,21 @@
           <!-- Heading -->
           <div class="sidebar-heading">Interface</div>
 
+          <!-- Nav Item - Categories -->
+        <li class="nav-item active">
+          <a class="nav-link" th:href="@{category}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Categories</span></a
+          >
+        </li>
+        <!-- Nav Item -  Product-->
+        <li class="nav-item active">
+          <a class="nav-link" th:href="@{products}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Products</span></a
+          >
+        </li>
+
           <!-- Nav Item - Pages Collapse Menu -->
           <li class="nav-item">
             <a
@@ -77,6 +92,7 @@
             >
               <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Components:</h6>
+                <a class="collapse-item" th:href="@{category}">Categories</a>
                 <a class="collapse-item" th:href="@{product}">product</a>
                 <a class="collapse-item" href="cards.html">Cards</a>
               </div>
@@ -164,13 +180,7 @@
             >
           </li>
 
-          <!-- Nav Item - Tables -->
-          <li class="nav-item">
-            <a class="nav-link" href="tables.html">
-              <i class="fas fa-fw fa-table"></i>
-              <span>Tables</span></a
-            >
-          </li>
+        
 
           <!-- Divider -->
           <hr class="sidebar-divider d-none d-md-block" />
