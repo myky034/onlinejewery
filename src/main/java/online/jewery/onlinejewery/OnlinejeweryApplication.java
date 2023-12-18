@@ -1,5 +1,6 @@
 package online.jewery.onlinejewery;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

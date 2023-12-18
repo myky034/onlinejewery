@@ -2,17 +2,23 @@ package online.jewery.onlinejewery.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+
 
 @Controller
 public class OnlinejeweryController {
-    @RequestMapping("/admin/index")
+    @RequestMapping("/homepage")
+    public String home() {
+        return "homepage/index.html";
+    }
+    @RequestMapping("/products")
+    public String products() {
+        return "homepage/products.html";
+    }
+    
+    @RequestMapping("/admin")
     public String index() {
-        return "admin/index.html";
+        return "admin/index";
     }
 
-    @RequestMapping("/admin/product")
-    public String product() {
-        return "admin/product.html";
-    }
 }
