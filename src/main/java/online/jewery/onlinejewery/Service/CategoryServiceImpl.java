@@ -6,6 +6,9 @@ import java.util.Optional;
 import javax.management.RuntimeErrorException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import online.jewery.onlinejewery.Model.Category;
@@ -39,5 +42,11 @@ public class CategoryServiceImpl implements CategoryService {
             throw new RuntimeErrorException(null, "Category not found for id :: " + id);
         }
         return category;
+    }
+    @Override
+    public Page<Category> findPaginated(int pageNo, int pageSize) {
+        
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return this.categoryRepository.findAll(pageable);
     }
 }

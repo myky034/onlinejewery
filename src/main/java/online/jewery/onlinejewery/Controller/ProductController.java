@@ -3,6 +3,7 @@ package online.jewery.onlinejewery.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +26,8 @@ public class ProductController {
 
     @GetMapping("/products")
     public String viewProduct(Model  model) {
-        model.addAttribute("listProducts", producutService.getAllProducts());
-        return "admin/products";
+       
+        return findPaginated(1, model);
     }
     @GetMapping("/showNewProductForm")
     public String showNewProductForm(Model model) {
@@ -54,4 +55,17 @@ public class ProductController {
         this.producutService.deleteProductById(id);
         return "redirect:/products";
     }
+    @GetMapping("/page/{pageNo}")
+    public String findPaginated(@PathVariable (value = "pageNo") int pageNo, Model model) {
+        int pageSize = 5;
+        Page<Product> page = producutService.findPaginated(pageNo, pageSize);
+        List<Product> listProducts = page.getContent();
+        
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+        model.addAttribute("listProducts", listProducts);
+        return "admin/products";
+    }
+    
 }

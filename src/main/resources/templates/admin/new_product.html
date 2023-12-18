@@ -36,12 +36,12 @@
                 <input type="text" th:field="*{name}" placeholder="Product name" class="form-control mb-4 col-4">
                 <input type="text" th:field="*{price}" placeholder="Price" class="form-control mb-4 col-4">
                 <input type="text" th:field="*{description}" placeholder="Description product" class="form-control mb-4 col-4">
-                <div class="form-control">
+                <div class="form-control mb-4 col-4">
                   <input type="file" accept="img/*" name="image" id="file" onchange="loadFile(event)" style="display: none;">
-                  <label for="file" style="cursor: pointer;">Upload Image</label>
-                  <img id="output" width="200" />
-                  <br>
+                  <label for="file" style="cursor: pointer;">Upload Image</label>                  
+                  
               </div>
+              <div><img id="output" width="200" /></div>
                 <button type="submit" class="btn btn-info col-2">Save</button>
             </form>
         </div>
