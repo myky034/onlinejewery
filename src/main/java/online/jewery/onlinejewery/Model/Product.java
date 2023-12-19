@@ -1,5 +1,7 @@
 package online.jewery.onlinejewery.Model;
 
+import javax.management.ObjectName;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -8,13 +10,12 @@ public class Product {
     
     @Id
     private String id;
-
     private String name;
     private String image;
     private double price;
     private String description;
     private String categoryId;
-
+    
     // Constructors, getters, setters
     public Product() {}
     
@@ -24,6 +25,13 @@ public class Product {
         this.price = price;
         this.description = description;
         this.categoryId = categoryId;
+    }
+     public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
     public String getName() {
         return name;

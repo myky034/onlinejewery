@@ -16,7 +16,7 @@ public class OnlinejeweryController {
         return "homepage/products.html";
     }
     
-    @RequestMapping("/admin")
+    @RequestMapping("/")
     public String index() {
         return "admin/index";
     }

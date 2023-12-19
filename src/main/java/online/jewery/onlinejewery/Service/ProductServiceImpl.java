@@ -6,6 +6,9 @@ import java.util.Optional;
 import javax.management.RuntimeErrorException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import online.jewery.onlinejewery.Model.Product;
@@ -39,5 +42,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteProductById(String id) {
         this.productRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<Product> findPaginated(int pageNo, int pageSize) {
+        // TODO Auto-generated method stub
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return this.productRepository.findAll(pageable);
     }
 }

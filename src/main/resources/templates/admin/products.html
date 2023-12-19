@@ -497,7 +497,10 @@
             <div class="card shadow mb-4">
               <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">
-                  <a th:href = "@{/showNewProductForm}" class="btn btn-primary">Add Product</a>
+                  <div style="display: flex;">
+                    <a th:href = "@{/showNewProductForm}" class="btn btn-primary mr-2">Add Product</a>
+                    <input class="bg-light border-0 small" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+                  </div>           
                 </h6>
               </div>
               <div class="card-body">
@@ -524,7 +527,9 @@
                       <td th:text="${product.id}"></td>
                       <td th:text="${product.name}"></td>
                       <td th:text="${product.price}"></td>
-                      <td th:text="${product.image}"></td>
+                      <td><img src="${product.image}"
+						            height="100px" width="100px">
+                      </td>
                       <td th:text="${product.description}"></td>
                       <td th:text="${product.categoryId}"></td>
                       <td>
@@ -535,6 +540,28 @@
                   </tbody>
                   </table>
                 </div>
+
+                <div th:if = "${totalPages > 1}">
+                  <div class="row col-sm-10">
+                    <div class="col-sm-2">
+                      Total Rows: [[${totalItems}]]
+                    </div>
+                    <div class="col-sm-1">
+                      <span th:each="i : ${#numbers.sequence(1, totalPages)}">
+                        <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}}">[[${i}]]</a>
+                        <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp;&nbsp;
+                      </span>
+                    </div>
+                    <div class="col-sm-1">
+                      <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">Next </a>
+                        <span th:unless="${currentPage < totalPages}">Next</span>
+                    </div>
+                    <div class="col-sm-1">
+                      <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}}">Last</a>
+                        <span th:unless="${currentPage < totalPages}">Last</span>
+                    </div>
+                  </div>
+              </div>
               </div>
             </div>
           </div>
@@ -599,6 +626,39 @@
         </div>
       </div>
     </div>
+
+    <script>
+      function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("dataTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[1];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+              }       
+            }
+          }
+
+      // // get elements by their ID
+      // const searchInput = document.getElementById('searchInput');
+      // const searchButton = document.getElementById('searchButton');
+
+      // // add event listener to the button
+      // searchButton.addEventListener('click', function() {
+      //   // get the search input value
+      //   const searchTerm = searchInput.value;
+      //   // do something with the search term (e.g. redirect to a search results page)
+      //   console.log(`Searching for "${searchTerm}"...`);
+      // });                  
+    </script>
 
     <!-- Bootstrap core JavaScript-->
     <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
