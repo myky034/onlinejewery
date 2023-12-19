@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>category</title>
+    <title>user</title>
 
     <!-- Custom fonts for this template-->
     <link
@@ -58,8 +58,9 @@
         <!-- Heading -->
         <div class="sidebar-heading">Interface</div>
 
-        <!-- Nav Item - Categories -->
-        <li class="nav-item active">
+        
+          <!-- Nav Item - Categories -->
+          <li class="nav-item active">
             <a class="nav-link" th:href="@{category}">
               <i class="fas fa-fw fa-table"></i>
               <span>Categories</span></a
@@ -72,13 +73,13 @@
               <span>Products</span></a
             >
           </li>
-           <!-- Nav Item -  User-->
-        <li class="nav-item active">
-          <a class="nav-link" th:href="@{users}">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Users</span></a
-          >
-        </li>
+          <!-- Nav Item -  User-->
+          <li class="nav-item active">
+            <a class="nav-link" th:href="@{users}">
+              <i class="fas fa-fw fa-table"></i>
+              <span>Users</span></a
+            >
+          </li>
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
@@ -498,18 +499,16 @@
           <!-- Begin Page Content -->
           <div class="container-fluid">
             <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800">List Categories</h1>
+            <h1 class="h3 mb-2 text-gray-800">List Users</h1>
 
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
-                
               <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">
                   <div style="display: flex;">
-                    <a th:href = "@{/showNewCategoryForm}" class="btn btn-primary">Add Category</a>
+                    <a th:href = "@{/showNewUserForm}" class="btn btn-primary mr-2">Add User</a>
                     <input class="bg-light border-0 small" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
-                  </div>
-                    
+                  </div>           
                 </h6>
               </div>
               <div class="card-body">
@@ -520,45 +519,52 @@
                     width="100%"
                     cellspacing="0"
                   >
-                    <thead>
-                      <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Actions</th>
-                      </tr>
-                    </thead>                 
-                    <tbody>
-                      <tr th:each="category : ${listCategories}">
-                        <td th:text="${category.id}"></td>
-                        <td th:text="${category.name}"></td>
-                        <td>
-                            <a th:href = "@{/showFormForUpdate/{id}(id=${category.id})}" class="btn btn-warning">Update</a>
-                            <a th:href = "@{/deleteCategory/{id}(id=${category.id})}" class="btn btn-danger">Delete</a>
-                        </td>
-                      </tr>                   
-                    </tbody>
+                  <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Address</th>
+                      <th>Phone</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>                 
+                  <tbody>
+                    <tr th:each="user : ${listUser}">
+                      <td th:text="${user.id}"></td>
+                      <td th:text="${user.name}"></td>
+                      <td th:text="${user.email}"></td>
+                      <td th:text="${user.address}"></td>
+                      <td th:text="${user.phone}"></td>
+                      <td>
+                          <a th:href = "@{/showFormUserForUpdate/{id}(id=${user.id})}" class="btn btn-warning">Update</a>
+                          <a th:href = "@{/deleteUser/{id}(id=${user.id})}" class="btn btn-danger">Delete</a>
+                      </td>
+                    </tr>                   
+                  </tbody>
                   </table>
                 </div>
-                <!-- <div th:if = "${totalPages > 1}">
+
+                <div th:if = "${totalPages > 1}">
                   <div class="row col-sm-10">
                     <div class="col-sm-2">
                       Total Rows: [[${totalItems}]]
                     </div>
                     <div class="col-sm-1">
                       <span th:each="i : ${#numbers.sequence(1, totalPages)}">
-                        <a th:if="${currentPage != i}" th:href="@{'/category/page/' + ${i}}">[[${i}]]</a>
+                        <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}}">[[${i}]]</a>
                         <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp;&nbsp;
                       </span>
                     </div>
                     <div class="col-sm-1">
-                      <a th:if="${currentPage < totalPages}" th:href="@{'/category/page/' + ${currentPage + 1}}">Next </a>
+                      <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">Next </a>
                         <span th:unless="${currentPage < totalPages}">Next</span>
                     </div>
                     <div class="col-sm-1">
-                      <a th:if="${currentPage < totalPages}" th:href="@{'/category/page/' + ${totalPages}}">Last</a>
+                      <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}}">Last</a>
                         <span th:unless="${currentPage < totalPages}">Last</span>
                     </div>
-                  </div> -->
+                  </div>
               </div>
               </div>
             </div>
@@ -641,10 +647,23 @@
             } else {
               tr[i].style.display = "none";
             }
-    }       
-  }
-}
-</script>
+              }       
+            }
+          }
+
+      // // get elements by their ID
+      // const searchInput = document.getElementById('searchInput');
+      // const searchButton = document.getElementById('searchButton');
+
+      // // add event listener to the button
+      // searchButton.addEventListener('click', function() {
+      //   // get the search input value
+      //   const searchTerm = searchInput.value;
+      //   // do something with the search term (e.g. redirect to a search results page)
+      //   console.log(`Searching for "${searchTerm}"...`);
+      // });                  
+    </script>
+
     <!-- Bootstrap core JavaScript-->
     <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
     <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>

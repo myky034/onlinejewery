@@ -70,6 +70,14 @@
             <span>Products</span></a
           >
         </li>
+        <!-- Nav Item -  User-->
+        <li class="nav-item active">
+          <a class="nav-link" th:href="@{users}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Users</span></a
+          >
+        </li>
+        
 
           <!-- Nav Item - Pages Collapse Menu -->
           <li class="nav-item">
@@ -93,7 +101,8 @@
               <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Components:</h6>
                 <a class="collapse-item" th:href="@{category}">Categories</a>
-                <a class="collapse-item" th:href="@{product}">product</a>
+                <a class="collapse-item" th:href="@{products}">product</a>
+                <a class="collapse-item" th:href="@{users}">User</a>
                 <a class="collapse-item" href="cards.html">Cards</a>
               </div>
             </div>

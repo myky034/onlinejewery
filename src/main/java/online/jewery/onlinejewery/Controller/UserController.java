@@ -1,36 +1,49 @@
 package online.jewery.onlinejewery.Controller;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import online.jewery.onlinejewery.Model.UserComponent;
-import online.jewery.onlinejewery.Model.UserModel;
-import online.jewery.onlinejewery.Repository.UserRepo;
+import online.jewery.onlinejewery.Model.User;
+import online.jewery.onlinejewery.Service.UserService;
 
-@RestController
+@Controller
 public class UserController {
     @Autowired
-    private UserRepo userRepo;
-    @Autowired
-    UserComponent userComponent;
-
-    // Save method is predefine method in Mongo Repository
-    // with this method we will save user in our database
-    @PostMapping("/addUser")
-    public UserModel addUser(@RequestBody UserModel user) {
-        System.out.println(user);
-        return userRepo.save(user);
+    private UserService userService;
+    
+     @GetMapping("/users")
+    public String viewListUser(Model  model) {
+        model.addAttribute("listUser", userService.getAllUsers());
+        return "admin/users";
     }
-
-    // findAll method is predefine method in Mongo Repository
-    // with this method we will all user that is save in our database
-    @GetMapping("/getAllUser")
-    public List<UserModel> getAllUser() {
-        return userRepo.findAll();
+    @GetMapping("/showNewUserForm")
+    public String showNewUserForm(Model model) {
+        User user = new User();
+        model.addAttribute("user", user);
+        return "admin/new_user";
+    }
+    @PostMapping("/saveUser")
+    public String saveUser(@ModelAttribute("user") User user) {
+        //save user to db
+        userService.saveUser(user);
+        return "redirect:/users";
+    }
+    @GetMapping("/showFormUserForUpdate/{id}")
+    public String showFormUserForUpdate(@ModelAttribute(value = "id") String id, Model model) {
+        //get user from the service
+        User user = userService.getUserById(id);
+        model.addAttribute("user", user);
+        return "admin/update_user";
+    }
+    @GetMapping("/deleteUser/{id}")
+    public String deleteUser(@PathVariable (value = "id") String id) {
+        //call delete user method
+        this.userService.deleteUserById(id);
+        return "redirect:/users";
     }
 }
