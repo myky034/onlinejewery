@@ -84,7 +84,11 @@
           <h2>Last added products</h2>
           <section class="products">
             <article th:each="product : ${listProducts}">
-              <img th:src="@{/img/1.jpg}" alt="" />
+              <img
+                th:src="@{/img/1.jpg}"
+                alt="Online Jewelry"
+                style="width: 100%"
+              />
               <h3 th:text="${product.name}"></h3>
               <h4 th:text="'$' + ${product.price}"></h4>
               <a th:href="@{cart}" class="btn-add">Add to cart</a>
@@ -92,7 +96,9 @@
           </section>
         </div>
         <section class="quick-links">
-          <article style="background-image: url(img/2.jpg)">
+          <article
+            style="background-image: url(img/2.jpg); background-size: cover"
+          >
             <a href="#" class="table">
               <div class="cell">
                 <div class="text">
@@ -103,7 +109,10 @@
               </div>
             </a>
           </article>
-          <article class="red" style="background-image: url(img/3.jpg)">
+          <article
+            class="red"
+            style="background-image: url(img/3.jpg); background-size: cover"
+          >
             <a href="#" class="table">
               <div class="cell">
                 <div class="text">
@@ -116,7 +125,9 @@
               </div>
             </a>
           </article>
-          <article style="background-image: url(img/4.jpg)">
+          <article
+            style="background-image: url(img/4.jpg); background-size: cover"
+          >
             <a href="#" class="table">
               <div class="cell">
                 <div class="text">

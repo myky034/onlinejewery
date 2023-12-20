@@ -5,17 +5,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class OnlinejeweryController {
-    // @RequestMapping("/cart")
-    // public String home() {
-    // return "homepage/index.html";
-    // }
+    @RequestMapping("/login")
+    public String login() {
+        return "admin/login.html";
+    }
+
+    @RequestMapping("/register")
+    public String register() {
+        return "admin/register";
+    }
 
     @RequestMapping("/products")
     public String products() {
         return "homepage/products.html";
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/admin")
     public String index() {
         return "admin/index";
     }
